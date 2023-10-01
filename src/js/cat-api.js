@@ -7,15 +7,28 @@ axios.defaults.headers.common['x-api-key'] = API_KEY;
 
 function fetchBreeds() {
   
-   return axios.get(`${BASE_URL}breeds`)
-       .then(resp => { 
+    return axios.get(`${BASE_URL}breeds`)
+        .then(resp => {
     
-           if (resp.status !== 200) {
-               throw new Error(resp.status)
-           }
-           return resp.data;
+            if (resp.status !== 200) {
+                throw new Error(resp.status)
+            }
+            return resp.data;
          
-       })
+        });
 
 }
 
+
+function fetchCatByBreed(breedId) {
+    
+    return axios.get(`${BASE_URL}images/search?breed_ids=${breedId}`)
+        .then(resp => {
+            if (resp.status !== 200) {
+              throw new Error(resp.status)
+            }
+            return resp.data;
+        })
+}
+
+export { fetchBreeds, fetchCatByBreed };
